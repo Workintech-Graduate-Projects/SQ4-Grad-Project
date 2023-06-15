@@ -3,8 +3,6 @@ const server = express();
 var cors = require("cors");
 const tfRouter = require("./type_form/tf-router");
 
-require("dotenv").config();
-
 const { PORT } = require("../config/config");
 
 server.use(express.json());
