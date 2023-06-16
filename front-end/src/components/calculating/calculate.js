@@ -8,9 +8,7 @@ function CalculateCreditScore(sectorScore, positionScore, experienceScore) {
   const experienceWeight = 0.2;
 
   const creditScore = (sectorScore * sectorWeight) + (positionScore * positionWeight) - (experienceScore * experienceWeight);
-
-
-
+  
   return creditScore;
 
 }
@@ -25,19 +23,27 @@ function getPreference(creditScore) {
   }
 }
 
-function CreditScoreCalculator() {
-  const [sectorScore, setSectorScore] = useState("");
-  const [positionScore, setPositionScore] = useState("");
-  const [experienceScore, setExperienceScore] = useState("");
+function CreditScoreCalculator({obj}) {
+  
+  const [sectorScore, setSectorScore] = useState(0);
+  const [positionScore, setPositionScore] = useState(0);
+  const [experienceScore, setExperienceScore] = useState(0);
   const [creditScore, setCreditScore] = useState(0);
   const [preference, setPreference] = useState(0);
+
+  const newObj = obj;
+  
 
   const handleCalculate = () => {
     const calculatedCreditScore = CalculateCreditScore(sectorScore, positionScore, experienceScore);
     const calculatedPreference = getPreference(calculatedCreditScore);
 
+    newObj.creditScore = calculatedCreditScore;
+    newObj.preference = calculatedPreference;
+    console.log(newObj)
     setCreditScore(calculatedCreditScore);
     setPreference(calculatedPreference);
+    
   };
 
   return (
