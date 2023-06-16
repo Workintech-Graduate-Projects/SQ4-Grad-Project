@@ -1,6 +1,6 @@
 import axios from "axios";
 import Answers from "./Answers";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function TypeFormFetcher() {
   const [data, setData] = useState(null);
