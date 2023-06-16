@@ -2,8 +2,6 @@ const router = require("express").Router();
 const axios = require("axios");
 const { pdTOKEN, PORT } = require("../../config/config");
 
-
-
 const baseUrlPD = "https://api.pipedrive.com/v1/leads";
 
 router.post("/", async (req, res, next) => {
