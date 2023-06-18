@@ -58,37 +58,37 @@ function CreditScoreCalculator({ obj }) {
 
   return (
     <div>
-      <h1>Kredi Puanı Hesaplama</h1>
+      <h1 class="mb-5 mt-0 text-4xl font-medium leading-tight text-primary underline underline-offset-8" >Kredi Puanı Hesaplama</h1>
       <div>
-        <label>Sektör Puanı:</label>
-        <input
+        <label class="mb-2 mt-0 text-base  font-medium leading-tight text-primary " >Sektör Puanı : </label>
+        <input 
           type="number"
           value={sectorScore}
           onChange={(e) => setSectorScore(Number(e.target.value))}
         />
       </div>
       <div>
-        <label>Pozisyon Puanı:</label>
-        <input
+        <label class="mb-2 mt-0 text-base font-medium leading-tight text-primary" >Pozisyon Puanı : </label>
+        <input 
           type="number"
           value={positionScore}
           onChange={(e) => setPositionScore(Number(e.target.value))}
         />
       </div>
       <div>
-        <label>Deneyim Puanı:</label>
+        <label class="mb-2 mt-0 text-base font-medium leading-tight text-primary" >Deneyim Puanı : </label>
         <input
           type="number"
           value={experienceScore}
           onChange={(e) => setExperienceScore(Number(e.target.value))}
         />
       </div>
-      <button onClick={handleCalculate}>Hesapla</button>
+      <button class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 mt-7 mb-7 border-b-4 border-blue-700 hover:border-blue-500 shadow-lg shadow-blue-500/50 rounded-full transition  delay-100  hover:scale-110 duration-300" onClick={handleCalculate}>Hesapla</button>
       <div>
-        <p>Kredi Puanı: {creditScore}</p>
-        <p>Tercih Sırası: {preference}</p>
+        <p class="mb-2 mt-0 text-base font-medium leading-tight text-primary" >Kredi Puanı : {creditScore}</p>
+        <p class="mb-2 mt-0 text-base font-medium leading-tight text-primary" >Tercih Sırası : {preference}</p>
       </div>
-      <button onClick={handleOnclick}>PipeDrive Aktar </button>
+      <button class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 mt-7 mb-7 border-b-4 border-blue-700 hover:border-blue-500 shadow-lg shadow-blue-500/50 rounded-full transition  delay-100  hover:scale-110 duration-300" onClick={handleOnclick}>PipeDrive'a Aktar </button>
     </div>
   );
 }
