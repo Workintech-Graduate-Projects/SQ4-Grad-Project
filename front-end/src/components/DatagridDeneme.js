@@ -2,9 +2,28 @@ import React from "react";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { nanoid } from "nanoid";
 import Box from "@mui/material/Box";
-function CellDeneme() {
-  return <button>risk hesapla</button>;
+import creditScoreCalculator from "./calculating/calculate";
+import axios from "axios";
+function PipeDriveSend(params) {
+  const newObj = {
+    prefenrece: params.params.row.prefenrece,
+    creditScore: params.params.row.creditScore,
+    sektor: params.params.row.sektor,
+    tecrube: params.params.row.tecrube,
+    title: params.params.row.title,
+  };
+  async function handleOnclick() {
+    try {
+      await axios.post("http://localhost:9000/users", { newObj });
+      console.log("post işe yaradı");
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  console.log(params.params);
+  return <button onClick={handleOnclick}>PipeDrive Yolla</button>;
 }
+
 const PataGrid = ({ allAnswers }) => {
   const dataForGridTable = allAnswers.map((item) => {
     const answers = item.answers;
@@ -32,7 +51,37 @@ const PataGrid = ({ allAnswers }) => {
   });
   const newColumn2 = [
     ...newColumn,
-    { field: "risk", headerName: "Risk", renderCell: CellDeneme },
+    //{ field: "risk", headerName: "Risk", renderCell: CellDeneme returns html },
+    {
+      field: "creditScore",
+      headerName: "creditScore",
+      valueGetter: (params) => {
+        const credit = creditScoreCalculator({
+          sektor: params.row.sektor,
+          title: params.row.title,
+          tecrube: params.row.tecrube,
+        });
+        return credit.creditScore;
+      },
+    },
+    {
+      field: "preference",
+      headerName: "preference",
+      valueGetter: (params) => {
+        const credit = creditScoreCalculator({
+          sektor: params.row.sektor,
+          title: params.row.title,
+          tecrube: params.row.tecrube,
+        });
+        return credit.preference;
+      },
+    },
+    ,
+    {
+      field: "pipeDrive",
+      headerName: "Pipe-Drive",
+      renderCell: (params) => <PipeDriveSend params={params} />,
+    },
   ];
   return (
     <Box sx={{ height: 700, width: "100%" }}>
