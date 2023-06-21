@@ -1,6 +1,5 @@
 import CreditScoreCalculator from "./calculating/calculate";
 
-
 function Answers({ item }) {
   const answers = item.answers;
   const obj = {};
@@ -15,10 +14,10 @@ function Answers({ item }) {
   });
   const keys = Object.keys(obj);
   const values = Object.values(obj);
+  //console.log("bu obj", obj);
   return (
     <div style={{ marginTop: "20px", border: "1px solid black" }} key={item.id}>
       {keys.map((key, index) => {
-
         return (
           <p>
             {key}:{values[index]}

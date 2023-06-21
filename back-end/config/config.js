@@ -1,5 +1,6 @@
 const dotenv = require("dotenv").config();
 module.exports = {
+  //PORT: process.env.PORT || 3000,
   PORT: process.env.PORT,
   NODE_ENV: process.env.NODE_ENV || "development",
   //TYPEFORM_TOKEN: process.env.NODE_ENV,
