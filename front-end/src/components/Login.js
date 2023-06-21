@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import TypeFormFetcher from "./fetTypeFrom";
+// import TypeFormFetcher from "./fetTypeFrom";
 import { Link } from "react-router-dom";
 
 function Login() {
@@ -37,8 +37,6 @@ function Login() {
       </Link>
     </form>
   );
-
-  <TypeFormFetcher />;
 }
 
 export default Login;
