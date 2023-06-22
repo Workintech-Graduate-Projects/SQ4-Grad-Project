@@ -51,6 +51,16 @@ router.post("/", async (req, res) => {
   }
 });
 
+// Updating One
+router.put("/:id", async (req, res, next) => {
+  try {
+    await Constumer.findOneAndUpdate({ _id: req.params.id }, req.body);
+    res.json(await Constumer.findById(req.params.id));
+  } catch (error) {
+    next(error);
+  }
+});
+
 // // Deleting One
 router.delete("/:id", async (req, res) => {
   try {
