@@ -1,8 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
+
 const { MongoClient } = require("mongodb");
 
 const axios = require("axios");
+
 const server = express();
 var cors = require("cors");
 const pdRouter = require("./pipe_drive/pd-router");
@@ -10,6 +12,9 @@ const mongoRouter = require("./mongoDB/mongoDB-router");
 require("dotenv").config();
 
 const { PORT, mongoString } = require("../config/config");
+const titleRouter = require("./mongoDB/titles/titlesRouter");
+const sectorRouter = require("./mongoDB/sectors/sectorsRouter");
+const exceptionRouter = require("./mongoDB/exceptions/exceptionRouter");
 
 server.use(express.json());
 
@@ -88,6 +93,10 @@ server.use("/mongo", mongoRouter);
 //     next(error);
 //   }
 // });
+
+server.use("/titles", titleRouter);
+server.use("/sectors", sectorRouter);
+server.use("/exceptions", exceptionRouter);
 
 server.get("/", (req, res) => {
   res.send(`<h1>Server is running on port ${PORT} </h1>`);

@@ -10,7 +10,7 @@ function Answers({ item }) {
     obj[objKey] = objValue;
     if (a === "choice") {
       obj[objKey] = objValue.label;
-    }
+  }
   });
   const keys = Object.keys(obj);
   const values = Object.values(obj);
