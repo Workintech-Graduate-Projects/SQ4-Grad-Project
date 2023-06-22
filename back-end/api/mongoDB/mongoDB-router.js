@@ -39,7 +39,7 @@ router.post("/", async (req, res) => {
     preference: req.body.preference,
   });
   try {
-    const newSubscriber = await subscriber.save();
+    const newConstumer = await constumer.save();
     res.status(201).json(newSubscriber);
   } catch (err) {
     res.status(400).json({ message: err.message });
