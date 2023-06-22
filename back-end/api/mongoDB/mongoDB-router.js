@@ -7,13 +7,18 @@ router.get("/", async (req, res) => {
     const constumers = await Constumer.find();
     res.json(constumers);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ message: `${err.message} >>> Hata Burada` });
   }
 });
 
 // Getting One
-router.get("/:id", mw.getConstumer, (req, res) => {
-  res.json(res.subscriber);
+router.get("/:id", async (req, res) => {
+  try {
+    const constumers = await Constumer.findById(req.params.id);
+    res.json(constumers);
+  } catch (err) {
+    res.status(500).json({ message: `${err.message} >>> Hata Burada 2` });
+  }
 });
 
 // Creating one
@@ -47,10 +52,10 @@ router.post("/", async (req, res) => {
 });
 
 // // Deleting One
-router.delete("/:id", mw.getConstumer, async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
-    await res.constumer.remove();
-    res.json({ message: "Deleted Subscriber" });
+    const constumers = await Constumer.findByIdAndDelete(req.params.id);
+    res.json({ message: "Deleted Constumer:", constumers });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
