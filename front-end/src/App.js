@@ -11,7 +11,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login />}></Route>
-          <Route path="/login" element={<TypeFormFetcher />}></Route>
+          <Route path="/analyst" element={<TypeFormFetcher />}></Route>
+          <Route path="/manager" element={<TypeFormFetcher />}></Route>
         </Routes>
       </BrowserRouter>
     </div>
