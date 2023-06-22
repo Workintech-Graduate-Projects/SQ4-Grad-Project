@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const Constumer = require("./mongoDb-model");
-
+const mw = require("./mongoDb-middleware");
 // Getting all
 router.get("/", async (req, res) => {
   try {
@@ -12,13 +12,13 @@ router.get("/", async (req, res) => {
 });
 
 // Getting One
-router.get("/:id", getConstumer, (req, res) => {
+router.get("/:id", mw.getConstumer, (req, res) => {
   res.json(res.subscriber);
 });
 
 // Creating one
 router.post("/", async (req, res) => {
-  const subscriber = new Constumer({
+  const constumer = new Constumer({
     name: req.body.name,
     age: req.body.age,
     gender: req.body.gender,
@@ -40,14 +40,14 @@ router.post("/", async (req, res) => {
   });
   try {
     const newConstumer = await constumer.save();
-    res.status(201).json(newSubscriber);
+    res.status(201).json(newConstumer);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
 });
 
 // // Deleting One
-router.delete("/:id", getConstumer, async (req, res) => {
+router.delete("/:id", mw.getConstumer, async (req, res) => {
   try {
     await res.constumer.remove();
     res.json({ message: "Deleted Subscriber" });
@@ -55,20 +55,5 @@ router.delete("/:id", getConstumer, async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
-
-async function getConstumer(req, res, next) {
-  let constumer;
-  try {
-    constumer = await Constumer.findById(req.params.id);
-    if (constumer == null) {
-      return res.status(404).json({ message: "Cannot find subscriber" });
-    }
-  } catch (err) {
-    return res.status(500).json({ message: err.message });
-  }
-
-  res.constumer = constumer;
-  next();
-}
 
 module.exports = router;
