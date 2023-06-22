@@ -49,7 +49,8 @@ router.post("/", async (req, res) => {
 // // Deleting One
 router.delete("/:id", getConstumer, async (req, res) => {
   try {
-    await res.constumer.remove();
+    //const res =await
+    await Constumer.deleteOne(req.constumer);
     res.json({ message: "Deleted Subscriber" });
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -57,18 +58,18 @@ router.delete("/:id", getConstumer, async (req, res) => {
 });
 
 async function getConstumer(req, res, next) {
-  let constumer;
   try {
+    let constumer;
     constumer = await Constumer.findById(req.params.id);
     if (constumer == null) {
       return res.status(404).json({ message: "Cannot find subscriber" });
+    } else {
+      res.constumer = constumer;
+      next();
     }
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
-
-  res.constumer = constumer;
-  next();
 }
 
 module.exports = router;
