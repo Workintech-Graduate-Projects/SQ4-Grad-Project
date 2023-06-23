@@ -9,6 +9,8 @@ import PeopleIcon from "@mui/icons-material/People";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import LayersIcon from "@mui/icons-material/Layers";
 import AssignmentIcon from "@mui/icons-material/Assignment";
+// import PataGrid from "../Veriler/DatagridDeneme";
+import { Link } from "react-router-dom";
 
 export const mainListItems = (
   <React.Fragment>
@@ -18,25 +20,20 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Dashboard" />
     </ListItemButton>
-    <ListItemButton>
+    <ListItemButton component={Link} to="/orders">
       <ListItemIcon>
         <ShoppingCartIcon />
       </ListItemIcon>
       <ListItemText primary="Orders" />
     </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <ListItemText primary="Customers" />
-    </ListItemButton>
-    <ListItemButton>
+
+    <ListItemButton component={Link} to="/reports">
       <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>
       <ListItemText primary="Reports" />
     </ListItemButton>
-    <ListItemButton>
+    <ListItemButton component={Link} to="/integrations">
       <ListItemIcon>
         <LayersIcon />
       </ListItemIcon>
@@ -50,19 +47,19 @@ export const secondaryListItems = (
     <ListSubheader component="div" inset>
       Saved reports
     </ListSubheader>
-    <ListItemButton>
+    <ListItemButton component={Link} to="/currentmonth">
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>
       <ListItemText primary="Current month" />
     </ListItemButton>
-    <ListItemButton>
+    <ListItemButton component={Link} to="/quarter">
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>
       <ListItemText primary="Last quarter" />
     </ListItemButton>
-    <ListItemButton>
+    <ListItemButton component={Link} to="/sale">
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>
