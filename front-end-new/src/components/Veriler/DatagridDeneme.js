@@ -4,9 +4,10 @@ import { nanoid } from "nanoid";
 import Box from "@mui/material/Box";
 import creditScoreCalculator from "../../functions/calculate";
 import axios from "axios";
+
 function PipeDriveSend(params) {
   const newObj = {
-    prefenrece: params.params.row.prefenrece,
+    preference: params.params.row.preference,
     creditScore: params.params.row.creditScore,
     sektor: params.params.row.sektor,
     tecrube: params.params.row.tecrube,
@@ -25,24 +26,26 @@ function PipeDriveSend(params) {
 }
 
 const PataGrid = ({ allAnswers }) => {
-  const dataForGridTable = allAnswers.map((item) => {
-    const answers = item.answers;
-    const obj = {};
-    answers.map((answer) => {
-      const objKey = answer.field.ref;
-      const a = answer.type;
-      const objValue = answer[a];
-      obj[objKey] = objValue;
-      if (a === "choice") {
-        obj[objKey] = objValue.label;
-      }
-    });
-    obj.id = nanoid();
-    obj.submitted = item["submitted_at"];
-    return obj;
-  });
+  const dataForGridTable = allAnswers
+    ? allAnswers.map((item) => {
+        const answers = item.answers;
+        const obj = {};
+        answers.map((answer) => {
+          const objKey = answer.field.ref;
+          const a = answer.type;
+          const objValue = answer[a];
+          obj[objKey] = objValue;
+          if (a === "choice") {
+            obj[objKey] = objValue.label;
+          }
+        });
+        obj.id = nanoid();
+        obj.submitted = item["submitted_at"];
+        return obj;
+      })
+    : [];
 
-  const keys = Object.keys(dataForGridTable[0]);
+  const keys = dataForGridTable[0] ? Object.keys(dataForGridTable[0]) : [];
   const newColumn = keys.map((key) => {
     return {
       field: key,
@@ -51,7 +54,6 @@ const PataGrid = ({ allAnswers }) => {
   });
   const newColumn2 = [
     ...newColumn,
-    //{ field: "risk", headerName: "Risk", renderCell: CellDeneme returns html },
     {
       field: "creditScore",
       headerName: "creditScore",
@@ -76,7 +78,6 @@ const PataGrid = ({ allAnswers }) => {
         return credit.preference;
       },
     },
-    ,
     {
       field: "pipeDrive",
       headerName: "Pipe-Drive",

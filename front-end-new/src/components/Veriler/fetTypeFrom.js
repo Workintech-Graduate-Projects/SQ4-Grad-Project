@@ -8,15 +8,22 @@ function TypeFormFetcher() {
 
   async function handleOnClick() {
     console.log("handleclik Çalıştı");
-    await axios
-      .get("http://localhost:9000/typeformfetch")
-      .then((res) => {
-        setAllAnswers(res.data.items);
-        console.log("allAnswers:", res.data.items);
-      })
-      .catch((error) => {
-        console.log("Hata:", error);
-      });
+    // await axios
+    //   .get("http://localhost:9000/typeformfetch")
+    //   .then((res) => {
+    //     setAllAnswers(res.data.items);
+    //     console.log("allAnswers:", res.data.items);
+    //   })
+    //   .catch((error) => {
+    //     console.log("Hata:", error);
+    //   });
+    try {
+      const response = await axios.get("http://localhost:9000/typeformfetch");
+      setAllAnswers(response.data.items);
+      console.log("allAnswers:", response.data.items);
+    } catch (error) {
+      console.log("Hata:", error);
+    }
   }
   return (
     <>

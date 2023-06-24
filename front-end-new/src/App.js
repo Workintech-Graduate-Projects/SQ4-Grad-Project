@@ -4,6 +4,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import Orders from "./components/Dashboard/Orders";
 import Chart from "./components/Dashboard/Chart";
 import Deposits from "./components/Dashboard/Deposits";
+import PataGrid from "./components/Veriler/DatagridDeneme";
 
 function App() {
   return (
@@ -12,9 +13,9 @@ function App() {
         <Route path="/" element={<Login />}></Route>
         <Route path="/analyst" element={<Dashboard />}></Route>
         <Route path="/manager" element={<Dashboard />}></Route>
-        <Route path="/orders" element={<Orders />}></Route>
-        <Route path="/charts" element={<Chart />}></Route>
-        <Route path="/deposits" element={<Deposits />}></Route>
+        <Route path="/orders" element={<PataGrid />}></Route>
+        <Route path="/reports" element={<Chart />}></Route>
+        <Route path="/creditscore" element={<Deposits />}></Route>
       </Routes>
     </BrowserRouter>
   );
