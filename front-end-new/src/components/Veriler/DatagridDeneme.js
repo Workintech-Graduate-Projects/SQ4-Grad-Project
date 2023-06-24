@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { nanoid } from "nanoid";
 import Box from "@mui/material/Box";
@@ -9,8 +10,8 @@ function PipeDriveSend(params) {
   const newObj = {
     preference: params.params.row.preference,
     creditScore: params.params.row.creditScore,
-    sektor: params.params.row.sektor,
-    tecrube: params.params.row.tecrube,
+    sector: params.params.row.sector,
+    experience: params.params.row.experience,
     title: params.params.row.title,
   };
   async function handleOnclick() {
@@ -25,7 +26,22 @@ function PipeDriveSend(params) {
   return <button onClick={handleOnclick}>PipeDrive Yolla</button>;
 }
 
-const PataGrid = ({ allAnswers }) => {
+const PataGrid = () => {
+  const [allAnswers, setAllAnswers] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:9000/typeformfetch")
+      .then((res) => {
+        setAllAnswers(res.data.items);
+        console.log("allAnswers:", res.data.items);
+      })
+      .catch((error) => {
+        console.log("Hata:", error);
+      });
+  }, []);
+
+  console.log(allAnswers);
   const dataForGridTable = allAnswers
     ? allAnswers.map((item) => {
         const answers = item.answers;
@@ -59,9 +75,9 @@ const PataGrid = ({ allAnswers }) => {
       headerName: "creditScore",
       valueGetter: (params) => {
         const credit = creditScoreCalculator({
-          sektor: params.row.sektor,
+          sector: params.row.sector,
           title: params.row.title,
-          tecrube: params.row.tecrube,
+          experience: params.row.experience,
         });
         return credit.creditScore;
       },
@@ -71,9 +87,9 @@ const PataGrid = ({ allAnswers }) => {
       headerName: "preference",
       valueGetter: (params) => {
         const credit = creditScoreCalculator({
-          sektor: params.row.sektor,
+          sector: params.row.sector,
           title: params.row.title,
-          tecrube: params.row.tecrube,
+          experience: params.row.experience,
         });
         return credit.preference;
       },

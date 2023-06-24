@@ -65,10 +65,10 @@ export default function Orders() {
           {rows.map((row) => (
             <TableRow key={row.id}>
               <TableCell>{row.name}</TableCell>
-              <TableCell>{row.sektor}</TableCell>
+              <TableCell>{row.sector}</TableCell>
               <TableCell>{row.title}</TableCell>
-              <TableCell>{row.tecrube}</TableCell>
-              <TableCell align="right">{`${row.maas}`}</TableCell>
+              <TableCell>{row.experience}</TableCell>
+              <TableCell align="right">{`${row.salary}`}</TableCell>
             </TableRow>
           ))}
         </TableBody>
