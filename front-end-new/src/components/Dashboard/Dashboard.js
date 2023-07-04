@@ -23,7 +23,6 @@ import Chart from "./Chart";
 import Deposits from "./Deposits";
 import Orders from "./Orders";
 
-
 function Copyright(props) {
   return (
     <Typography
@@ -183,6 +182,7 @@ export default function Dashboard() {
                   <Chart />
                 </Paper>
               </Grid>
+
               {/* Recent Deposits */}
               <Grid item xs={12} md={4} lg={3}>
                 <Paper
@@ -196,6 +196,7 @@ export default function Dashboard() {
                   <Deposits />
                 </Paper>
               </Grid>
+
               {/* Recent Orders */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>

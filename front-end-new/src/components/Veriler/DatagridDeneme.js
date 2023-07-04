@@ -6,15 +6,8 @@ import Box from "@mui/material/Box";
 import creditScoreCalculator from "../../functions/calculate";
 import axios from "axios";
 
-
-
-
 function PipeDriveSend(params) {
-
-
-  
   const newObj = {
-    
     preference: params.params.row.preference,
     creditScore: params.params.row.creditScore,
     sector: params.params.row.sector,
@@ -22,9 +15,6 @@ function PipeDriveSend(params) {
     title: params.params.row.title,
   };
 
-  
-
-  
   async function handleOnclick() {
     try {
       await axios.post("http://localhost:9000/users", { newObj });
@@ -80,7 +70,6 @@ const PataGrid = () => {
     };
   });
 
-  
   const newColumn2 = [
     ...newColumn,
     {
@@ -93,9 +82,7 @@ const PataGrid = () => {
           experience: params.row.experience,
         });
 
-        console.log(params.row.sector.sayi)
         return credit.creditScore;
-       
       },
     },
     {

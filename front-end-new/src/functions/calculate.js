@@ -1,8 +1,7 @@
 export default function creditScoreCalculator(obj) {
   const newObj = obj;
-  console.log(newObj);
 
-  const sectors = [
+ const sectors = [
     { veri: "Araştırma ve Geliştirme", sayi: 85 },
     { veri: "Bilgi Teknolojileri ve Medya", sayi: 80 },
     { veri: "Diğer", sayi: 70 },

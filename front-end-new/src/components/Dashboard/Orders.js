@@ -7,37 +7,27 @@ import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Title from "./Title";
-import axios from "axios";
+import axios, { all } from "axios";
 import { nanoid } from "nanoid";
 
 export default function Orders() {
-  const [allAnswers, setAllAnswers] = useState(null);
-  let rows = [];
-  if (allAnswers) {
-    rows = allAnswers.map((item) => {
-      const answers = item.answers;
-      const obj = {};
-      answers.map((answer) => {
-        const objKey = answer.field.ref;
-        const a = answer.type;
-        const objValue = answer[a];
-        obj[objKey] = objValue;
-        if (a === "choice") {
-          obj[objKey] = objValue.label;
-        }
-      });
-      obj.id = nanoid();
-      obj.submitted = item["submitted_at"];
-      return obj;
-    });
-  }
+  // const [allAnswers, setAllAnswers] = useState([]);
+  const [rows, setRows] = useState([]);
 
   useEffect(() => {
     axios
-      .get("http://localhost:9000/typeformfetch")
+      .get("https://tolgaapp.herokuapp.com/mongo")
       .then((res) => {
-        setAllAnswers(res.data.items);
-        console.log("allAnswers:", res.data.items);
+        const allAnswers = res.data;
+        console.log("allAnswers:", allAnswers);
+        const extractedRows = allAnswers.map((answer) => ({
+          name: answer.name,
+          sector: answer.sector,
+          title: answer.title,
+          experience: answer.experience,
+          salary: answer.salary,
+        }));
+        setRows(extractedRows);
       })
       .catch((error) => {
         console.log("Hata:", error);
