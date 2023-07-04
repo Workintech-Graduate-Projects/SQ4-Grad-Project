@@ -1,5 +1,6 @@
 export default function creditScoreCalculator(obj) {
   const newObj = obj;
+  console.log(newObj);
 
   const sectors = [
     { veri: "Araştırma ve Geliştirme", sayi: 85 },
@@ -131,10 +132,11 @@ export default function creditScoreCalculator(obj) {
   let sectorScore = 70;
 
   for (let i = 0; i < sectors.length; i++) {
-    if (sectors[i].veri === newObj.sektor) {
+    if (sectors[i].veri === newObj.sector) {
       sectorScore = sectors[i].sayi;
     }
   }
+ 
 
   let positionScore = 55;
 
@@ -144,7 +146,9 @@ export default function creditScoreCalculator(obj) {
     }
   }
 
-  let experienceScore = newObj.tecrube;
+  
+
+  let experienceScore = newObj.experience;
 
   function calculateCreditScore(sectorScore, positionScore, experienceScore) {
     const sectorWeight = 0.5;
@@ -155,9 +159,11 @@ export default function creditScoreCalculator(obj) {
       sectorScore * sectorWeight +
       positionScore * positionWeight -
       experienceScore * experienceWeight;
-
+     
     return creditScore;
   }
+
+  
 
   function getPreference(creditScore) {
     if (creditScore >= 80) {
@@ -173,30 +179,32 @@ export default function creditScoreCalculator(obj) {
     positionScore,
     experienceScore
   );
-  const prefrence = getPreference(creditScore);
-  /*const handleCalculate = () => {
-      const calculatedCreditScore = CalculateCreditScore(
-        sectorScore,
-        positionScore,
-        experienceScore
-      );
-      const calculatedPreference = getPreference(calculatedCreditScore);
-  
-      newObj.creditScore = calculatedCreditScore;
-      newObj.preference = calculatedPreference;
-      console.log(newObj);
-      setCreditScore(calculatedCreditScore);
-      setPreference(calculatedPreference);
-    };*/
 
-  /*async function handleOnclick() {
-      try {
-        await axios.post("http://localhost:9000/users", { newObj });
-        console.log("post işe yaradı");
-      } catch (error) {
-        console.log(error);
-      }
-    }*/
-  const returnObj = { creditScore: creditScore, preference: prefrence };
+  const preference = getPreference(creditScore);
+
+  //  const handleCalculate = () => {
+  //     const calculatedCreditScore = CalculateCreditScore(
+  //        sectorScore,
+  //        positionScore,
+  //        experienceScore
+  //      );
+  //     const calculatedPreference = getPreference(calculatedCreditScore);
+
+  //      newObj.creditScore = calculatedCreditScore;
+  //      newObj.preference = calculatedPreference;
+  //     console.log(newObj);
+  //     setCreditScore(calculatedCreditScore);
+  //     setPreference(calculatedPreference);
+  //   };
+
+  // async function handleOnclick() {
+  //     try {
+  //       await axios.post("http://localhost:9000/users", { newObj });
+  //       console.log("post işe yaradı");
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+  const returnObj = { creditScore: creditScore, preference: preference };
   return returnObj;
 }

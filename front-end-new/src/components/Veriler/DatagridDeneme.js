@@ -6,14 +6,25 @@ import Box from "@mui/material/Box";
 import creditScoreCalculator from "../../functions/calculate";
 import axios from "axios";
 
+
+
+
 function PipeDriveSend(params) {
+
+
+  
   const newObj = {
+    
     preference: params.params.row.preference,
     creditScore: params.params.row.creditScore,
     sector: params.params.row.sector,
     experience: params.params.row.experience,
     title: params.params.row.title,
   };
+
+  
+
+  
   async function handleOnclick() {
     try {
       await axios.post("http://localhost:9000/users", { newObj });
@@ -68,6 +79,8 @@ const PataGrid = () => {
       headerName: key.toUpperCase(),
     };
   });
+
+  
   const newColumn2 = [
     ...newColumn,
     {
@@ -79,7 +92,10 @@ const PataGrid = () => {
           title: params.row.title,
           experience: params.row.experience,
         });
+
+        console.log(params.row.sector.sayi)
         return credit.creditScore;
+       
       },
     },
     {
@@ -112,10 +128,5 @@ const PataGrid = () => {
     </Box>
   );
 };
-// valueGetter valueFormatter
-// rendercell içerisinde component renderlanabilir
-//Row editing  column editing admin için geçerli olacak
-// datagrid inital state problemini çöz
-// hesaplanan riski objenin içerisine ve databaseye kaydetmek gerekli
 
 export default PataGrid;
