@@ -8,7 +8,9 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Title from "./Title";
 import axios, { all } from "axios";
+import PataGrid from "../Veriler/DatagridDeneme";
 import { nanoid } from "nanoid";
+
 
 export default function Orders() {
   // const [allAnswers, setAllAnswers] = useState([]);
@@ -41,7 +43,7 @@ export default function Orders() {
   return (
     <React.Fragment>
       <Title>Recent Orders</Title>
-      <Table size="small">
+      <Table size="large" sx={{ mt: 3 }}>
         <TableHead>
           <TableRow>
             <TableCell>İsim</TableCell>
@@ -63,7 +65,7 @@ export default function Orders() {
           ))}
         </TableBody>
       </Table>
-      <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
+      <Link color="primary" href="/orders" onClick={PataGrid} sx={{ mt: 3 }}>
         See more orders
       </Link>
     </React.Fragment>
