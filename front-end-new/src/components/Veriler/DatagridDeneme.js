@@ -32,10 +32,10 @@ const PataGrid = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:9000/typeformfetch")
+      .get("https://tolgaapp.herokuapp.com/mongo")
       .then((res) => {
-        setAllAnswers(res.data.items);
-        console.log("allAnswers:", res.data.items);
+        setAllAnswers(res.data);
+        console.log("allAnswers:", res.data);
       })
       .catch((error) => {
         console.log("Hata:", error);
@@ -43,24 +43,7 @@ const PataGrid = () => {
   }, []);
 
   console.log(allAnswers);
-  const dataForGridTable = allAnswers
-    ? allAnswers.map((item) => {
-        const answers = item.answers;
-        const obj = {};
-        answers.map((answer) => {
-          const objKey = answer.field.ref;
-          const a = answer.type;
-          const objValue = answer[a];
-          obj[objKey] = objValue;
-          if (a === "choice") {
-            obj[objKey] = objValue.label;
-          }
-        });
-        obj.id = nanoid();
-        obj.submitted = item["submitted_at"];
-        return obj;
-      })
-    : [];
+  const dataForGridTable = allAnswers ? allAnswers : [];
 
   const keys = dataForGridTable[0] ? Object.keys(dataForGridTable[0]) : [];
   const newColumn = keys.map((key) => {
@@ -72,31 +55,7 @@ const PataGrid = () => {
 
   const newColumn2 = [
     ...newColumn,
-    {
-      field: "creditScore",
-      headerName: "creditScore",
-      valueGetter: (params) => {
-        const credit = creditScoreCalculator({
-          sector: params.row.sector,
-          title: params.row.title,
-          experience: params.row.experience,
-        });
 
-        return credit.creditScore;
-      },
-    },
-    {
-      field: "preference",
-      headerName: "preference",
-      valueGetter: (params) => {
-        const credit = creditScoreCalculator({
-          sector: params.row.sector,
-          title: params.row.title,
-          experience: params.row.experience,
-        });
-        return credit.preference;
-      },
-    },
     {
       field: "pipeDrive",
       headerName: "Pipe-Drive",
@@ -106,6 +65,7 @@ const PataGrid = () => {
   return (
     <Box sx={{ height: 700, width: "100%" }}>
       <DataGrid
+        getRowId={(row) => row._id}
         rows={dataForGridTable}
         columns={newColumn2}
         slots={{

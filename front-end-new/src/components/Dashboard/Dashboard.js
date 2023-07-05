@@ -23,6 +23,7 @@ import Chart from "./Chart";
 import Deposits from "./Deposits";
 import Orders from "./Orders";
 
+
 function Copyright(props) {
   return (
     <Typography
@@ -33,7 +34,7 @@ function Copyright(props) {
     >
       {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
-      Workintech-SQ4 GRAD Project
+        Workintech-SQ4 GRAD Project
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}

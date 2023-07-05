@@ -11,7 +11,6 @@ import axios, { all } from "axios";
 import PataGrid from "../Veriler/DatagridDeneme";
 import { nanoid } from "nanoid";
 
-
 export default function Orders() {
   // const [allAnswers, setAllAnswers] = useState([]);
   const [rows, setRows] = useState([]);
@@ -45,22 +44,22 @@ export default function Orders() {
       <Title>Recent Orders</Title>
       <Table size="large" sx={{ mt: 3 }}>
         <TableHead>
-          <TableRow>
-            <TableCell>İsim</TableCell>
-            <TableCell>Sektör</TableCell>
-            <TableCell>Unvan</TableCell>
-            <TableCell>Deneyim</TableCell>
-            <TableCell align="right">Maaş Bilgisi</TableCell>
+          <TableRow key={1}>
+            <TableCell key={"name"}>İsim</TableCell>
+            <TableCell key={"sektör"}>Sektör</TableCell>
+            <TableCell key={"unvan"}>Unvan</TableCell>
+            <TableCell key={"deneyim"}>Deneyim</TableCell>
+            <TableCell key={"maaşbilgisi"}>Maaş Bilgisi</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row.id}>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.sector}</TableCell>
-              <TableCell>{row.title}</TableCell>
-              <TableCell>{row.experience}</TableCell>
-              <TableCell align="right">{`${row.salary}`}</TableCell>
+              <TableCell key={row.name}>{row.name}</TableCell>
+              <TableCell key={row.sector}>{row.sector}</TableCell>
+              <TableCell key={row.title}>{row.title}</TableCell>
+              <TableCell key={row.experience}>{row.experience}</TableCell>
+              <TableCell key={row.salary}>{row.salary}</TableCell>
             </TableRow>
           ))}
         </TableBody>
