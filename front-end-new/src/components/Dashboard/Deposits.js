@@ -10,7 +10,7 @@ function preventDefault(event) {
 export default function Deposits() {
   return (
     <React.Fragment>
-      <Title>Kredi Analiz</Title>
+      <Title>Credit Score</Title>
       <Typography component="p" variant="h4">
         $3,024.00
       </Typography>
