@@ -5,6 +5,7 @@ const titleSchema = new mongoose.Schema(
     title: {
       type: String,
       required: true,
+      unique: true,
     },
     score: {
       type: Number,

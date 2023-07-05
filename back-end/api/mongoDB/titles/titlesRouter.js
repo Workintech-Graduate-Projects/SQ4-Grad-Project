@@ -1,5 +1,10 @@
 const router = require("express").Router();
 const Titles = require("./titlesSchema");
+const {
+  titleExistMW,
+  titleUniqeMW,
+  checkTitleAndScoreMW,
+} = require("./titlesMiddleware");
 // get all titles
 router.get("/", async (req, res, next) => {
   try {
@@ -11,16 +16,15 @@ router.get("/", async (req, res, next) => {
 });
 
 // get by id
-router.get("/:id", async (req, res, next) => {
+router.get("/:id", titleExistMW, async (req, res, next) => {
   try {
-    const title = await Titles.findById(req.params.id);
-    res.json(title);
+    res.json(req.title);
   } catch (error) {
     next(error);
   }
 });
 // create
-router.post("/", async (req, res, next) => {
+router.post("/", titleUniqeMW, checkTitleAndScoreMW, async (req, res, next) => {
   try {
     const newTitle = new Titles({
       title: req.body.title,
@@ -34,7 +38,7 @@ router.post("/", async (req, res, next) => {
   }
 });
 // update by id
-router.put("/:id", async (req, res, next) => {
+router.put("/:id", titleExistMW, async (req, res, next) => {
   try {
     if (req.body.title && req.body.score) {
       const updatedTitle = await Titles.findByIdAndUpdate(
@@ -82,10 +86,22 @@ router.get("/name/:titleName", async (req, res, next) => {
   }
 });
 // delete by id
-router.delete("/:id", async (req, res, next) => {
+router.delete("/:id", titleExistMW, async (req, res, next) => {
   try {
     await Titles.findByIdAndDelete(req.params.id);
     res.json({ message: "title deleted" });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// create more then one (kullanılmayabilir databaseye eklemek için yaptım)
+router.post("/more", async (req, res, next) => {
+  try {
+    const newTitleArr = req.body.dataArr;
+    const createdTitle = await Titles.create(newTitleArr);
+
+    res.json(createdTitle);
   } catch (error) {
     next(error);
   }

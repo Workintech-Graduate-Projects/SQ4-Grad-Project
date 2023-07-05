@@ -12,8 +12,13 @@ router.get("/", async (req, res) => {
 });
 
 // Getting One
-router.get("/:id", getConstumer, (req, res) => {
-  res.json(res.subscriber);
+router.get("/:id", async (req, res, next) => {
+  try {
+    const customer = await Constumer.findById(req.params.id);
+    res.json(customer);
+  } catch (error) {
+    next(error);
+  }
 });
 
 // Creating one

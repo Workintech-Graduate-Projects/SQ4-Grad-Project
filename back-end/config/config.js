@@ -6,4 +6,5 @@ module.exports = {
   //TYPEFORM_TOKEN: process.env.NODE_ENV,
   pdTOKEN: process.env.PIPEDRIVE_TOKEN,
   mongoString: process.env.DATABASE_URL,
+  typeFormSecret: process.env.TYPEFORM_SECRET,
 };

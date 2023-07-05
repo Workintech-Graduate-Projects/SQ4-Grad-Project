@@ -5,6 +5,7 @@ const sectorSchema = new mongoose.Schema(
     sector: {
       type: String,
       required: true,
+      unique: true,
     },
     score: {
       type: Number,
