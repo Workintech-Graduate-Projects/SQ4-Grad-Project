@@ -7,9 +7,8 @@ import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Title from "./Title";
-import axios, { all } from "axios";
+import axios from "axios";
 import PataGrid from "../Veriler/DatagridDeneme";
-import { nanoid } from "nanoid";
 
 export default function Orders() {
   // const [allAnswers, setAllAnswers] = useState([]);
@@ -17,7 +16,7 @@ export default function Orders() {
 
   useEffect(() => {
     axios
-      .get("https://tolgaapp.herokuapp.com/mongo")
+      .get("https://gradapp.adaptable.app/mongo")
       .then((res) => {
         const allAnswers = res.data;
         console.log("allAnswers:", allAnswers);
@@ -35,31 +34,31 @@ export default function Orders() {
       });
   }, []);
 
-  function preventDefault(event) {
-    event.preventDefault();
-  }
+  // function preventDefault(event) {
+  //   event.preventDefault();
+  // }
 
   return (
     <React.Fragment>
       <Title>Recent Orders</Title>
       <Table size="large" sx={{ mt: 3 }}>
         <TableHead>
-          <TableRow key={1}>
-            <TableCell key={"name"}>İsim</TableCell>
-            <TableCell key={"sektör"}>Sektör</TableCell>
-            <TableCell key={"unvan"}>Unvan</TableCell>
-            <TableCell key={"deneyim"}>Deneyim</TableCell>
-            <TableCell key={"maaşbilgisi"}>Maaş Bilgisi</TableCell>
+          <TableRow>
+            <TableCell>İsim</TableCell>
+            <TableCell>Sektör</TableCell>
+            <TableCell>Unvan</TableCell>
+            <TableCell>Deneyim</TableCell>
+            <TableCell>Maaş Bilgisi</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell key={row.name}>{row.name}</TableCell>
-              <TableCell key={row.sector}>{row.sector}</TableCell>
-              <TableCell key={row.title}>{row.title}</TableCell>
-              <TableCell key={row.experience}>{row.experience}</TableCell>
-              <TableCell key={row.salary}>{row.salary}</TableCell>
+            <TableRow key={row._id}>
+              <TableCell>{row.name}</TableCell>
+              <TableCell>{row.sector}</TableCell>
+              <TableCell>{row.title}</TableCell>
+              <TableCell>{row.experience}</TableCell>
+              <TableCell>{row.salary}</TableCell>
             </TableRow>
           ))}
         </TableBody>

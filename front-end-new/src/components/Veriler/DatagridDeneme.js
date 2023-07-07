@@ -1,9 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { nanoid } from "nanoid";
+
 import Box from "@mui/material/Box";
-import creditScoreCalculator from "../../functions/calculate";
+
 import axios from "axios";
 
 function PipeDriveSend(params) {
@@ -29,10 +29,11 @@ function PipeDriveSend(params) {
 
 const PataGrid = () => {
   const [allAnswers, setAllAnswers] = useState(null);
+  
 
   useEffect(() => {
     axios
-      .get("https://tolgaapp.herokuapp.com/mongo")
+      .get("https://gradapp.adaptable.app/mongo")
       .then((res) => {
         setAllAnswers(res.data);
         console.log("allAnswers:", res.data);

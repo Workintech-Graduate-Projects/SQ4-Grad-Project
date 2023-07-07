@@ -24,7 +24,7 @@ function Copyright(props) {
     >
       {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
-      Workintech-SQ4 GRAD Project
+        Workintech-SQ4 GRAD Project
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -60,7 +60,7 @@ export default function Login() {
 
   return (
     <Box
-      class="candles"
+      className="candles"
       style={{
         backgroundImage: `url(${logo})`,
         backgroundSize: "cover",

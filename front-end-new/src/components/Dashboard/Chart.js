@@ -1,135 +1,63 @@
-// import React, { useEffect, useState } from "react";
-// import { useTheme } from "@mui/material/styles";
-// import {
-//   LineChart,
-//   Line,
-//   XAxis,
-//   YAxis,
-//   Label,
-//   ResponsiveContainer,
-// } from "recharts";
-// import Title from "./Title";
+import React, { useEffect, useState } from "react";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Pie } from "react-chartjs-2";
+import Title from "./Title";
+import axios from "axios";
+ChartJS.register(ArcElement, Tooltip, Legend);
 
-// const Chart = ({ allAnswers }) => {
-//   const theme = useTheme();
+const Charts = () => {
+  const [variable, setVariable] = useState({});
 
-//   return (
-//     <React.Fragment>
-//       <Title>General Credit Score </Title>
-//       <ResponsiveContainer>
-//         <LineChart
-//           // data={chartData}
-//           margin={{
-//             top: 16,
-//             right: 16,
-//             bottom: 0,
-//             left: 24,
-//           }}
-//         >
-//           <XAxis
-//             dataKey="person"
-//             stroke={theme.palette.text.secondary}
-//             style={theme.typography.body2}
-//           />
-//           <YAxis
-//             stroke={theme.palette.text.secondary}
-//             style={theme.typography.body2}
-//           >
-//             <Label
-//               angle={270}
-//               position="left"
-//               style={{
-//                 textAnchor: "middle",
-//                 fill: theme.palette.text.primary,
-//                 ...theme.typography.body1,
-//               }}
-//             >
-//               Score
-//             </Label>
-//           </YAxis>
-//           <Line
-//             isAnimationActive={false}
-//             type="monotone"
-//             dataKey="score"
-//             stroke={theme.palette.primary.main}
-//             dot={false}
-//           />
-//         </LineChart>
-//       </ResponsiveContainer>
-//     </React.Fragment>
-//   );
-// };
+  useEffect(() => {
+    axios
+      .get("https://gradapp.adaptable.app/chart/pie")
+      .then((res) => {
+        setVariable(res.data);
 
-// export default Chart;
-
-// Data retrieved from https://netmarketshare.com/
-// Build the chart
-
-var Highcharts = require("highcharts");
-
-require("highcharts/modules/exporting")(Highcharts);
-
-Highcharts.chart("container", {
-  chart: {
-    plotBackgroundColor: null,
-    plotBorderWidth: null,
-    plotShadow: false,
-    type: "pie",
-  },
-  title: {
-    text: "Browser market shares in March, 2022",
-    align: "left",
-  },
-  tooltip: {
-    pointFormat: "{series.name}: <b>{point.percentage:.1f}%</b>",
-  },
-  accessibility: {
-    point: {
-      valueSuffix: "%",
-    },
-  },
-  plotOptions: {
-    pie: {
-      allowPointSelect: true,
-      cursor: "pointer",
-      dataLabels: {
-        enabled: false,
+        console.log("allAnswers:", res.data);
+      })
+      .catch((error) => {
+        console.log("Hata:", error);
+      });
+  }, []);
+  console.log(variable);
+  const data = {
+    labels: [],
+    datasets: [
+      {
+        label: "# of Votes",
+        data: [],
+        backgroundColor: [
+          "rgba(255, 99, 132, 0.2)",
+          "rgba(54, 162, 235, 0.2)",
+          "rgba(255, 206, 86, 0.2)",
+          "rgba(75, 192, 192, 0.2)",
+        ],
+        borderColor: [
+          "rgba(255, 99, 132, 1)",
+          "rgba(54, 162, 235, 1)",
+          "rgba(255, 206, 86, 1)",
+          "rgba(75, 192, 192, 1)",
+        ],
+        borderWidth: 1,
       },
-      showInLegend: true,
-    },
-  },
-  series: [
-    {
-      name: "Brands",
-      colorByPoint: true,
-      data: [
-        {
-          name: "Chrome",
-          y: 74.77,
-          sliced: true,
-          selected: true,
-        },
-        {
-          name: "Edge",
-          y: 12.82,
-        },
-        {
-          name: "Firefox",
-          y: 4.63,
-        },
-        {
-          name: "Safari",
-          y: 2.44,
-        },
-        {
-          name: "Internet Explorer",
-          y: 2.02,
-        },
-        {
-          name: "Other",
-          y: 3.28,
-        },
-      ],
-    },
-  ],
-});
+    ],
+  };
+
+  data.labels = Object.keys(variable);
+  data.datasets[0].data = Object.values(variable);
+
+  console.log(data);
+
+  return (
+    <div className="Chart" style={{ width: "50%", height: "50%" }}>
+      <section>
+        <Title>Pie Chart</Title>
+
+        <Pie style={{ width: "10%", heigth: "10%" }} data={data} />
+      </section>
+    </div>
+  );
+};
+
+export default Charts;
