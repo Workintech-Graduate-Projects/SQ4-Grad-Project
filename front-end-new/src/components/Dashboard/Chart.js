@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Pie, Bar, Line, Scatter } from "react-chartjs-2";
+import { Pie } from "react-chartjs-2";
 import Title from "./Title";
 import axios from "axios";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Charts = () => {
@@ -51,75 +47,10 @@ const Charts = () => {
   data.datasets[0].data = Object.values(variable);
 
   return (
-    <div className="Chart">
+    <div className="Chart" style={{ width: "50%", height: "50%" }}>
       <section>
-        <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-          <Grid container spacing={3}>
-            {/* Pie Chart */}
-            <Grid item xs={12} md={6} lg={6}>
-              <Paper
-                sx={{
-                  p: 2,
-                  display: "flex",
-                  flexDirection: "column",
-                  height: "100%",
-                  width: "100%",
-                }}
-              >
-                <Title>Pie Chart</Title>
-                <Pie data={data} />
-              </Paper>
-            </Grid>
-
-            {/* Bar Chart */}
-            <Grid item xs={12} md={6} lg={6}>
-              <Paper
-                sx={{
-                  p: 2,
-                  display: "flex",
-                  flexDirection: "column",
-                  height: "100%",
-                  width: "100%",
-                }}
-              >
-                <Title>Bar Chart</Title>
-                <Bar data={data} />
-              </Paper>
-            </Grid>
-
-            {/* Line Chart */}
-            <Grid item xs={12} md={6} lg={6}>
-              <Paper
-                sx={{
-                  p: 2,
-                  display: "flex",
-                  flexDirection: "column",
-                  height: "100%",
-                  width: "100%",
-                }}
-              >
-                <Title>Line Chart</Title>
-                <Line data={data} />
-              </Paper>
-            </Grid>
-
-            {/* Scatter Chart */}
-            <Grid item xs={12} md={6} lg={6}>
-              <Paper
-                sx={{
-                  p: 2,
-                  display: "flex",
-                  flexDirection: "column",
-                  height: "100%",
-                  width: "100%",
-                }}
-              >
-                <Title>Scatter Chart</Title>
-                <Scatter data={data} />
-              </Paper>
-            </Grid>
-          </Grid>
-        </Container>
+        <Title>Pie Chart</Title>
+        <Pie data={data} />
       </section>
     </div>
   );
