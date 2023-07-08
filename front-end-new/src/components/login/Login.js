@@ -32,12 +32,11 @@ function Copyright(props) {
   );
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
-
 const defaultTheme = createTheme();
 
 export default function Login() {
   const navigate = useNavigate();
+  const [error, setError] = React.useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -50,7 +49,7 @@ export default function Login() {
     ) {
       navigate("/manager");
     } else {
-      console.log("Unrecognized user type");
+      setError("Kullanıcı adı veya şifre hatalı.");
     }
     console.log({
       email: data.get("email"),
@@ -113,6 +112,11 @@ export default function Login() {
                 control={<Checkbox value="remember" color="secondary" />}
                 label="Remember me"
               />
+              {error && (
+                <Typography variant="body2" color="error" align="center">
+                  {error}
+                </Typography>
+              )}
               <Button
                 type="submit"
                 fullWidth

@@ -197,7 +197,7 @@ export default function Dashboard() {
                     width: "100%",
                   }}
                 >
-                  <LineChart />
+                  <LineChart/>
                 </Paper>
               </Grid>
 
