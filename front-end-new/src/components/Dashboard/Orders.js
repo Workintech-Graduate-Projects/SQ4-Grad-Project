@@ -40,7 +40,6 @@ export default function Orders() {
   // }
 
   return (
-    
     <React.Fragment>
       <Title>Recent Orders</Title>
       <Table size="large" sx={{ mt: 3 }}>

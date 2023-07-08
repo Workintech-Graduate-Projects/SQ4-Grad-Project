@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Pie } from "react-chartjs-2";
+import { Pie, Bar, Line, Scatter } from "react-chartjs-2";
 import Title from "./Title";
 import axios from "axios";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Charts = () => {
@@ -13,14 +17,13 @@ const Charts = () => {
       .get("https://gradapp.adaptable.app/chart/pie")
       .then((res) => {
         setVariable(res.data);
-
         console.log("allAnswers:", res.data);
       })
       .catch((error) => {
         console.log("Hata:", error);
       });
   }, []);
-  console.log(variable);
+
   const data = {
     labels: [],
     datasets: [
@@ -47,14 +50,76 @@ const Charts = () => {
   data.labels = Object.keys(variable);
   data.datasets[0].data = Object.values(variable);
 
-  console.log(data);
-
   return (
-    <div className="Chart" style={{ width: "50%", height: "50%" }}>
+    <div className="Chart">
       <section>
-        <Title>Pie Chart</Title>
+        <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+          <Grid container spacing={3}>
+            {/* Pie Chart */}
+            <Grid item xs={12} md={6} lg={6}>
+              <Paper
+                sx={{
+                  p: 2,
+                  display: "flex",
+                  flexDirection: "column",
+                  height: "100%",
+                  width: "100%",
+                }}
+              >
+                <Title>Pie Chart</Title>
+                <Pie data={data} />
+              </Paper>
+            </Grid>
 
-        <Pie style={{ width: "10%", heigth: "10%" }} data={data} />
+            {/* Bar Chart */}
+            <Grid item xs={12} md={6} lg={6}>
+              <Paper
+                sx={{
+                  p: 2,
+                  display: "flex",
+                  flexDirection: "column",
+                  height: "100%",
+                  width: "100%",
+                }}
+              >
+                <Title>Bar Chart</Title>
+                <Bar data={data} />
+              </Paper>
+            </Grid>
+
+            {/* Line Chart */}
+            <Grid item xs={12} md={6} lg={6}>
+              <Paper
+                sx={{
+                  p: 2,
+                  display: "flex",
+                  flexDirection: "column",
+                  height: "100%",
+                  width: "100%",
+                }}
+              >
+                <Title>Line Chart</Title>
+                <Line data={data} />
+              </Paper>
+            </Grid>
+
+            {/* Scatter Chart */}
+            <Grid item xs={12} md={6} lg={6}>
+              <Paper
+                sx={{
+                  p: 2,
+                  display: "flex",
+                  flexDirection: "column",
+                  height: "100%",
+                  width: "100%",
+                }}
+              >
+                <Title>Scatter Chart</Title>
+                <Scatter data={data} />
+              </Paper>
+            </Grid>
+          </Grid>
+        </Container>
       </section>
     </div>
   );
