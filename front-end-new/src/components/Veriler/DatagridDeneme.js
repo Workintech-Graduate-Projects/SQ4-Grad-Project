@@ -29,7 +29,6 @@ function PipeDriveSend(params) {
 
 const PataGrid = () => {
   const [allAnswers, setAllAnswers] = useState(null);
-  
 
   useEffect(() => {
     axios
@@ -51,6 +50,8 @@ const PataGrid = () => {
     return {
       field: key,
       headerName: key.toUpperCase(),
+      flex: 1, 
+      minWidth: 150, 
     };
   });
 
@@ -61,17 +62,22 @@ const PataGrid = () => {
       field: "pipeDrive",
       headerName: "Pipe-Drive",
       renderCell: (params) => <PipeDriveSend params={params} />,
+      sortable: false, 
+      filterable: false, 
+      width: 150, 
     },
   ];
+
   return (
-    <Box sx={{ height: 700, width: "100%" }}>
+    <Box sx={{ mt: 2, mb: 2, ml: 2, width: "calc(100% - 2rem)" }}>
       <DataGrid
         getRowId={(row) => row._id}
         rows={dataForGridTable}
         columns={newColumn2}
-        slots={{
-          toolbar: GridToolbar,
+        components={{
+          Toolbar: GridToolbar,
         }}
+        autoHeight
       />
     </Box>
   );
