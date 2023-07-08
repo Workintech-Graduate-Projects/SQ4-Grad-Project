@@ -103,7 +103,7 @@ const LineChart = () => {
 
   return (
     <div>
-      <Title>Person Amount</Title>
+      <Title>Line Chart</Title>
       <Line data={data} />
     </div>
   );

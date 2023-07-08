@@ -47,7 +47,7 @@ const ScatterChart = () => {
 
   return (
   <div>
-    <Title>Area Chart</Title>
+    <Title>Scatter Chart</Title>
     <Scatter data={data} /> 
     </div>);
 }
