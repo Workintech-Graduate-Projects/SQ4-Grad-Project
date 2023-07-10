@@ -45,12 +45,12 @@ const data = {
   labels : [],
   datasets: [
     {
-      label: 'Dataset 1',
+      label: 'Kişi sayısı',
       data: [],
       backgroundColor: 'rgba(255, 99, 132, 0.5)',
     },
     {
-      label: 'Dataset 2',
+      label: 'Credit Score',
       data:[],
       backgroundColor: 'rgba(53, 162, 235, 0.5)',
     },

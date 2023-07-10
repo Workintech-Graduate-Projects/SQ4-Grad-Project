@@ -10,7 +10,7 @@ const Charts = () => {
 
   useEffect(() => {
     axios
-      .get("https://gradapp.adaptable.app/chart/pie")
+      .get("https://gradapp.adaptable.app/chart/pref")
       .then((res) => {
         setVariable(res.data);
         console.log("allAnswers:", res.data);
@@ -24,7 +24,7 @@ const Charts = () => {
     labels: [],
     datasets: [
       {
-        label: "# of Votes",
+        label: "# of preference",
         data: [],
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",

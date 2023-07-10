@@ -42,29 +42,72 @@ const PataGrid = () => {
       });
   }, []);
 
+  const upDateRow = (newRow, oldRow) => {
+    console.log(newRow, oldRow);
+    axios
+      .put("https://gradapp.adaptable.app/mongo/" + newRow._id, {
+        data: newRow,
+      })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.log("hata:", error);
+      });
+    return newRow;
+  };
+
   console.log(allAnswers);
   const dataForGridTable = allAnswers ? allAnswers : [];
 
   const keys = dataForGridTable[0] ? Object.keys(dataForGridTable[0]) : [];
-  const newColumn = keys.map((key) => {
-    return {
-      field: key,
-      headerName: key.toUpperCase(),
-      flex: 1, 
-      minWidth: 150, 
-    };
+  const newColumn = [];
+  keys.map((key) => {
+    if (key !== "exception") {
+      newColumn.push({
+        field: key,
+        headerName: key.toUpperCase(),
+        flex: 1,
+        minWidth: 150,
+        editable: true,
+      });
+    }
   });
 
   const newColumn2 = [
     ...newColumn,
-
+    {
+      field: "exception",
+      headerName: "Exception",
+      sortable: false,
+      filterable: false,
+      width: 150,
+      editable: true,
+      valueGetter: (params) => {
+        if (
+          (params.row.exception.title,
+          params.row.exception.sector,
+          params.row.exception.preference)
+        ) {
+          return (
+            params.row.exception.title +
+            " " +
+            params.row.exception.sector +
+            " " +
+            params.row.exception.preference
+          );
+        } else {
+          return "none";
+        }
+      },
+    },
     {
       field: "pipeDrive",
       headerName: "Pipe-Drive",
       renderCell: (params) => <PipeDriveSend params={params} />,
-      sortable: false, 
-      filterable: false, 
-      width: 150, 
+      sortable: false,
+      filterable: false,
+      width: 150,
     },
   ];
 
@@ -74,10 +117,12 @@ const PataGrid = () => {
         getRowId={(row) => row._id}
         rows={dataForGridTable}
         columns={newColumn2}
+        editMode="row"
         components={{
           Toolbar: GridToolbar,
         }}
         autoHeight
+        processRowUpdate={upDateRow}
       />
     </Box>
   );

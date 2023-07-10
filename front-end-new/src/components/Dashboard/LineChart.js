@@ -69,7 +69,7 @@ const LineChart = () => {
 
   useEffect(() => {
     axios
-      .get("https://gradapp.adaptable.app/chart/pie")
+      .get("https://gradapp.adaptable.app/chart/countOfPeople")
       .then((res) => {
         setPerson(res.data);
 
@@ -84,13 +84,13 @@ const LineChart = () => {
     labels: [],
     datasets: [
       {
-        label: "Dataset 1",
+        label: "başvuru sayısı",
         data: [],
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(255, 99, 132, 0.5)",
       },
       {
-        label: "Dataset 2",
+        label: "tarih",
         data: [],
         borderColor: "rgb(53, 162, 235)",
         backgroundColor: "rgba(53, 162, 235, 0.5)",
