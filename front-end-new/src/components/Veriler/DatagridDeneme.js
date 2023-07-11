@@ -6,35 +6,50 @@ import Box from "@mui/material/Box";
 
 import axios from "axios";
 
-function PipeDriveSend(params) {
-  const newObj = {
-    preference: params.params.row.preference,
-    creditScore: params.params.row.creditScore,
-    sector: params.params.row.sector,
-    experience: params.params.row.experience,
-    title: params.params.row.title,
-  };
-
-  async function handleOnclick() {
-    try {
-      await axios.post("http://localhost:9000/users", { newObj });
-      console.log("post işe yaradı");
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  console.log(params.params);
-  return <button onClick={handleOnclick}>PipeDrive Yolla</button>;
-}
-
 const PataGrid = () => {
   const [allAnswers, setAllAnswers] = useState(null);
+  function PipeDriveSend(params) {
+    async function handleOnclick(e) {
+      try {
+        await axios.post(
+          "https://gradapp.adaptable.app/users/" + params.params.row._id
+        );
+
+        console.log(params.params.row);
+        params.params.row.isSendToPipeDrive = true;
+        setAllAnswers(
+          allAnswers.map((item) => {
+            if (item._id === params.params.row._id) {
+              return { ...item, isSendToPipeDrive: true };
+            } else {
+              return item;
+            }
+          })
+        );
+
+        e.preventDefault();
+        console.log("post işe yaradı");
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    return (
+      <button
+        onClick={handleOnclick}
+        disabled={params.params.row.isSendToPipeDrive}
+      >
+        PipeDrive Yolla
+      </button>
+    );
+  }
 
   useEffect(() => {
     axios
       .get("https://gradapp.adaptable.app/mongo")
       .then((res) => {
         setAllAnswers(res.data);
+
         console.log("allAnswers:", res.data);
       })
       .catch((error) => {
@@ -123,6 +138,9 @@ const PataGrid = () => {
         }}
         autoHeight
         processRowUpdate={upDateRow}
+        isCellEditable={(params) =>
+          params.row.isSendToPipeDrive ? false : true
+        }
       />
     </Box>
   );
