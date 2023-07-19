@@ -40,6 +40,7 @@ import { Line } from "react-chartjs-2";
 // import faker from "faker";
 import Title from "./Title";
 import axios from "axios";
+import Menu from "./Menu";
 
 ChartJS.register(
   CategoryScale,
@@ -64,7 +65,7 @@ ChartJS.register(
 //   },
 // };
 
-const LineChart = () => {
+export const LineChart1 = () => {
   const [person, setPerson] = useState({});
 
   useEffect(() => {
@@ -108,5 +109,13 @@ const LineChart = () => {
     </div>
   );
 };
-
+const LineChart = () => {
+  return (
+    <div>
+      <Menu>
+        <LineChart1 />
+      </Menu>
+    </div>
+  );
+};
 export default LineChart;

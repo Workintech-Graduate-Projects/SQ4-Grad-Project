@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 
 export const mainListItems = (
   <React.Fragment>
-    <ListItemButton>
+    <ListItemButton component={Link} to="/manager">
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
@@ -38,6 +38,24 @@ export const mainListItems = (
         <LayersIcon />
       </ListItemIcon>
       <ListItemText primary="Credit Score" />
+    </ListItemButton>
+    <ListItemButton component={Link} to="/titles">
+      <ListItemIcon>
+        <ShoppingCartIcon />
+      </ListItemIcon>
+      <ListItemText primary="Titles" />
+    </ListItemButton>
+    <ListItemButton component={Link} to="/sectors">
+      <ListItemIcon>
+        <ShoppingCartIcon />
+      </ListItemIcon>
+      <ListItemText primary="Sectors" />
+    </ListItemButton>
+    <ListItemButton component={Link} to="/exceptions">
+      <ListItemIcon>
+        <ShoppingCartIcon />
+      </ListItemIcon>
+      <ListItemText primary="Exceptions" />
     </ListItemButton>
   </React.Fragment>
 );

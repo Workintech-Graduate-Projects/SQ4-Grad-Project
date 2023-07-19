@@ -19,11 +19,6 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 
 import { mainListItems, secondaryListItems } from "./listItems";
-import Chart from "./Chart";
-import { LineChart1 } from "./LineChart";
-import VerticalChart from "./VerticalChart";
-import Orders from "./Orders";
-import ScatterChart from "./ScatterChart";
 
 function Copyright(props) {
   return (
@@ -92,7 +87,7 @@ const Drawer = styled(MuiDrawer, {
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
-export default function Dashboard() {
+export default function Menu(props) {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -166,74 +161,7 @@ export default function Dashboard() {
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={3}>
-              {/* Chart */}
-              <Grid item xs={12} md={5} lg={6}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                    height: "100%",
-                    width: "100%",
-                  }}
-                >
-                  <Chart />
-                </Paper>
-              </Grid>
-
-              {/* Recent Deposits */}
-              <Grid item xs={12} md={5} lg={6}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                    height: "100%",
-                    width: "100%",
-                  }}
-                >
-                  <LineChart1 />
-                </Paper>
-              </Grid>
-
-              {/* Vertical Chart */}
-              <Grid item xs={12} md={5} lg={6}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                    height: "100%",
-                    width: "100%",
-                  }}
-                >
-                  <VerticalChart />
-                </Paper>
-              </Grid>
-
-              {/* Scatter Chart */}
-              <Grid item xs={12} md={5} lg={6}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                    height: "100%",
-                    width: "100%",
-                  }}
-                >
-                  <ScatterChart />
-                </Paper>
-              </Grid>
-
-              {/* Recent Orders */}
-              <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                  <Orders />
-                </Paper>
-              </Grid>
-            </Grid>
+            {props.children}
             <Copyright sx={{ pt: 4 }} />
           </Container>
         </Box>
