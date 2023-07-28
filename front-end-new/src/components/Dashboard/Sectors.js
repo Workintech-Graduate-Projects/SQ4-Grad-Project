@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Menu from "./Menu";
 import axios from "axios";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
@@ -43,18 +42,16 @@ const Sectors = () => {
 
   return (
     <div>
-      <Menu>
-        <Button>Add</Button>
-        <Box sx={{ display: "flex", flexWrap: "wrap" }}>
-          {sectors !== null ? (
-            sectors.map((item) => {
-              return <CardE sector={item.sector} score={item.score} />;
-            })
-          ) : (
-            <></>
-          )}
-        </Box>
-      </Menu>
+      <Button>Add</Button>
+      <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+        {sectors !== null ? (
+          sectors.map((item) => {
+            return <CardE sector={item.sector} score={item.score} />;
+          })
+        ) : (
+          <></>
+        )}
+      </Box>
     </div>
   );
 };

@@ -1,13 +1,10 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import Menu from "../Dashboard/Menu";
-
 import Box from "@mui/material/Box";
-
 import axios from "axios";
 
-const DataGridChart = () => {
+const PataGrid = () => {
   const [allAnswers, setAllAnswers] = useState(null);
   function PipeDriveSend(params) {
     async function handleOnclick(e) {
@@ -146,13 +143,5 @@ const DataGridChart = () => {
     </Box>
   );
 };
-const PataGrid = () => {
-  return (
-    <div>
-      <Menu>
-        <DataGridChart />
-      </Menu>
-    </div>
-  );
-};
+
 export default PataGrid;

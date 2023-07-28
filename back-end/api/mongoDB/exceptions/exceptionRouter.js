@@ -1,4 +1,9 @@
 const router = require("express").Router();
+const {
+  exceptionExistMW,
+  exceptionUniqeMW,
+  checkCredentialsMW,
+} = require("./exceptionMiddelware");
 const Exceptions = require("./exceptionSchema");
 // get all exceptions
 router.get("/", async (req, res, next) => {
@@ -10,31 +15,35 @@ router.get("/", async (req, res, next) => {
   }
 });
 // get by id
-router.get("/:id", async (req, res, next) => {
+router.get("/:id", exceptionExistMW, (req, res, next) => {
   try {
-    const exception = await Exceptions.findById(req.params.id);
-    res.json(exception);
+    res.json(req.exception);
   } catch (error) {
     next(error);
   }
 });
 //create
-router.post("/", async (req, res, next) => {
-  try {
-    const newException = new Exceptions({
-      sector: req.body.sector,
-      title: req.body.title,
-      preference: req.body.preference,
-    });
-    const createdExpception = await newException.save();
+router.post(
+  "/",
+  checkCredentialsMW,
+  exceptionUniqeMW,
+  async (req, res, next) => {
+    try {
+      const newException = new Exceptions({
+        sector: req.body.sector,
+        title: req.body.title,
+        preference: req.body.preference,
+      });
+      const createdExpception = await newException.save();
 
-    res.json(createdExpception);
-  } catch (error) {
-    next(error);
+      res.json(createdExpception);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 // update by id
-router.put("/:id", async (req, res, next) => {
+router.put("/:id", exceptionExistMW, async (req, res, next) => {
   try {
     const updatedException = await Exceptions.findByIdAndUpdate(
       req.params.id,
@@ -53,10 +62,22 @@ router.put("/:id", async (req, res, next) => {
   }
 });
 // delete by id
-router.delete("/:id", async (req, res, next) => {
+router.delete("/:id", exceptionExistMW, async (req, res, next) => {
   try {
     await Exceptions.findByIdAndDelete(req.params.id);
     res.json({ message: "Exception deleted" });
+  } catch (error) {
+    next(error);
+  }
+});
+
+//insert many
+router.post("/more", async (req, res, next) => {
+  try {
+    const exception = req.body.dataArr;
+    const createdexception = await Exceptions.create(exception);
+
+    res.json(createdexception);
   } catch (error) {
     next(error);
   }

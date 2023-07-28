@@ -10,9 +10,7 @@ import Title from "./Title";
 import axios from "axios";
 import PataGrid from "../Veriler/DatagridDeneme";
 
-
 export default function Orders() {
-  // const [allAnswers, setAllAnswers] = useState([]);
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
@@ -34,10 +32,6 @@ export default function Orders() {
         console.log("Hata:", error);
       });
   }, []);
-
-  // function preventDefault(event) {
-  //   event.preventDefault();
-  // }
 
   return (
     <React.Fragment>

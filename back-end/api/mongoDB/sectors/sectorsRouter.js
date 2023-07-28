@@ -1,5 +1,10 @@
 const router = require("express").Router();
 const Sectors = require("./sectorsSchema");
+const {
+  SectorExistMW,
+  sectorUniqeMW,
+  checkSectorAndScoreMW,
+} = require("./sectorsMiddleware");
 // get all sectors
 router.get("/", async (req, res, next) => {
   try {
@@ -11,30 +16,34 @@ router.get("/", async (req, res, next) => {
 });
 
 // get by id
-router.get("/:id", async (req, res, next) => {
+router.get("/:id", SectorExistMW, async (req, res, next) => {
   try {
-    const sector = await Sectors.findById(req.params.id);
-    res.json(sector);
+    res.json(req.sector);
   } catch (error) {
     next(error);
   }
 });
 // create
-router.post("/", async (req, res, next) => {
-  try {
-    const newSector = new Sectors({
-      sector: req.body.sector,
-      score: req.body.score,
-    });
-    const createdSector = await newSector.save();
+router.post(
+  "/",
+  checkSectorAndScoreMW,
+  sectorUniqeMW,
+  async (req, res, next) => {
+    try {
+      const newSector = new Sectors({
+        sector: req.body.sector,
+        score: req.body.score,
+      });
+      const createdSector = await newSector.save();
 
-    res.json(createdSector);
-  } catch (error) {
-    next(error);
+      res.json(createdSector);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 // update by id
-router.put("/:id", async (req, res, next) => {
+router.put("/:id", SectorExistMW, async (req, res, next) => {
   try {
     if (req.body.sector && req.body.score) {
       const updatedSector = await Sectors.findByIdAndUpdate(
@@ -71,7 +80,7 @@ router.put("/:id", async (req, res, next) => {
   }
 });
 // get by sector name
-//türkçe karakter içerenlerde çalışmıyor
+
 router.get("/name/:sectorName", async (req, res, next) => {
   try {
     const sectorFindedByName = await Sectors.findOne({
@@ -83,7 +92,7 @@ router.get("/name/:sectorName", async (req, res, next) => {
   }
 });
 // delete by id
-router.delete("/:id", async (req, res, next) => {
+router.delete("/:id", SectorExistMW, async (req, res, next) => {
   try {
     await Sectors.findByIdAndDelete(req.params.id);
     res.json({ message: "sector deleted" });
@@ -91,4 +100,17 @@ router.delete("/:id", async (req, res, next) => {
     next(error);
   }
 });
+
+// create more then one
+router.post("/more", async (req, res, next) => {
+  try {
+    const newSectorArr = req.body.dataArr;
+    const createdSector = await Sectors.create(newSectorArr);
+
+    res.json(createdSector);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;

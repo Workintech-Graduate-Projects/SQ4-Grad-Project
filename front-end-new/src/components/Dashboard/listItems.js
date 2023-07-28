@@ -5,11 +5,9 @@ import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-
 import BarChartIcon from "@mui/icons-material/BarChart";
 import LayersIcon from "@mui/icons-material/Layers";
 import AssignmentIcon from "@mui/icons-material/Assignment";
-// import PataGrid from "../Veriler/DatagridDeneme";
 import { Link } from "react-router-dom";
 
 export const mainListItems = (
@@ -26,7 +24,6 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Orders" />
     </ListItemButton>
-
     <ListItemButton component={Link} to="/reports">
       <ListItemIcon>
         <BarChartIcon />

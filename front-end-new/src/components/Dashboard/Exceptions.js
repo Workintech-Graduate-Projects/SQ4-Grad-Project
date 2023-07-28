@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Menu from "./Menu";
 import axios from "axios";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
@@ -25,8 +24,12 @@ const CardE = (props) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Delete</Button>
-        <Button size="small">Update</Button>
+        <Button variant="contained" size="small">
+          Delete
+        </Button>
+        <Button variant="contained" size="small">
+          Update
+        </Button>
       </CardActions>
     </Card>
   );
@@ -75,25 +78,26 @@ const Exceptions = () => {
 
   return (
     <div>
-      <Menu>
-        <Button onClick={handleAddClick}>Add</Button>
+      <Button variant="contained" onClick={handleAddClick}>
+        Add
+      </Button>
 
-        <Box sx={{ display: "flex", flexWrap: "wrap" }}>
-          {exceptions !== null ? (
-            exceptions.map((item) => {
-              return (
-                <CardE
-                  title={item.title}
-                  preference={item.preference}
-                  sector={item.sector}
-                />
-              );
-            })
-          ) : (
-            <></>
-          )}
-        </Box>
-      </Menu>
+      <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+        {exceptions !== null ? (
+          exceptions.map((item) => {
+            return (
+              <CardE
+                title={item.title}
+                preference={item.preference}
+                sector={item.sector}
+              />
+            );
+          })
+        ) : (
+          <></>
+        )}
+      </Box>
+
       {showAddForm && (
         <div
           style={{
@@ -131,8 +135,15 @@ const Exceptions = () => {
             onChange={(event) => handleOnchange(event)}
             value={axsData.preference}
           />
-          <Button onClick={(event) => handleSendData(event)}>Send</Button>
-          <Button onClick={() => setShowAddForm(false)}>Cancel</Button>
+          <Button
+            variant="contained"
+            onClick={(event) => handleSendData(event)}
+          >
+            Send
+          </Button>
+          <Button variant="contained" onClick={() => setShowAddForm(false)}>
+            Cancel
+          </Button>
         </div>
       )}
     </div>

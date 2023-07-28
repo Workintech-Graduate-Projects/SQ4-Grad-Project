@@ -12,8 +12,13 @@ router.get("/", async (req, res) => {
 });
 
 // Getting One
-router.get("/:id", getConstumer, (req, res) => {
-  res.json(res.subscriber);
+router.get("/:id", async (req, res, next) => {
+  try {
+    const customer = await Constumer.findById(req.params.id);
+    res.json(customer);
+  } catch (error) {
+    next(error);
+  }
 });
 
 // Creating one
@@ -54,6 +59,17 @@ router.delete("/:id", getConstumer, async (req, res) => {
     res.json({ message: "Deleted Subscriber" });
   } catch (err) {
     res.status(500).json({ message: err.message });
+  }
+});
+router.put("/:id", async (req, res, next) => {
+  try {
+    let data = req.body.data;
+    let updatedUser = await Constumer.findByIdAndUpdate(req.params.id, data, {
+      returnDocument: "after",
+    });
+    res.status(201).json(updatedUser);
+  } catch (error) {
+    next(error);
   }
 });
 

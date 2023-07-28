@@ -1,18 +1,16 @@
 import React from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Chart from "./Chart";
-import { LineChart1 } from "./LineChart";
+import LineChart from "./LineChart";
 import VerticalChart from "./VerticalChart";
 import ScatterChart from "./ScatterChart";
-import Menu from "./Menu";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const Charts1 = () => {
+const Charts = () => {
   return (
     <div className="Chart">
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
@@ -42,7 +40,7 @@ const Charts1 = () => {
                 width: "100%",
               }}
             >
-              <LineChart1 />
+              <LineChart />
             </Paper>
           </Grid>
 
@@ -77,15 +75,6 @@ const Charts1 = () => {
           </Grid>
         </section>
       </Container>
-    </div>
-  );
-};
-const Charts = () => {
-  return (
-    <div>
-      <Menu>
-        <Charts1 />
-      </Menu>
     </div>
   );
 };

@@ -1,29 +1,20 @@
-import React , { useEffect, useState }  from 'react';
+import React, { useEffect, useState } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
   BarElement,
- 
   Tooltip,
   Legend,
-} from 'chart.js';
-import { Bar } from 'react-chartjs-2';
+} from "chart.js";
+import { Bar } from "react-chartjs-2";
 import Title from "./Title";
 import axios from "axios";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  
-  Tooltip,
-  Legend
-);
+ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 const VerticalChart = () => {
-
-    const [value, setValue] = useState({});
+  const [value, setValue] = useState({});
 
   useEffect(() => {
     axios
@@ -38,34 +29,30 @@ const VerticalChart = () => {
       });
   }, []);
 
-
-
-
-const data = {
-  labels : [],
-  datasets: [
-    {
-      label: 'Kişi sayısı',
-      data: [],
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-    },
-    {
-      label: 'Credit Score',
-      data:[],
-      backgroundColor: 'rgba(53, 162, 235, 0.5)',
-    },
-  ],
-};
+  const data = {
+    labels: [],
+    datasets: [
+      {
+        label: "Kişi sayısı",
+        data: [],
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
+      },
+      {
+        label: "Credit Score",
+        data: [],
+        backgroundColor: "rgba(53, 162, 235, 0.5)",
+      },
+    ],
+  };
   data.labels = Object.keys(value);
   data.datasets[0].data = Object.values(value);
 
+  return (
+    <div>
+      <Title>Vertical Chart</Title>
+      <Bar data={data} />
+    </div>
+  );
+};
 
-  return(
-  <div>
-    <Title >Vertical Chart</Title>
-    <Bar data={data} />
-  </div>);
-}
-
-
-export default VerticalChart
+export default VerticalChart;

@@ -13,7 +13,6 @@ const Charts = () => {
       .get("https://gradapp.adaptable.app/chart/pref")
       .then((res) => {
         setVariable(res.data);
-        console.log("allAnswers:", res.data);
       })
       .catch((error) => {
         console.log("Hata:", error);

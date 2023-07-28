@@ -43,19 +43,16 @@ const Titles = () => {
 
   return (
     <div>
-      <Menu>
-        <Button>Add</Button>
-
-        <Box sx={{ display: "flex", flexWrap: "wrap" }}>
-          {titles !== null ? (
-            titles.map((item) => {
-              return <CardE title={item.title} score={item.score} />;
-            })
-          ) : (
-            <></>
-          )}
-        </Box>
-      </Menu>
+      <Button>Add</Button>
+      <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+        {titles !== null ? (
+          titles.map((item) => {
+            return <CardE title={item.title} score={item.score} />;
+          })
+        ) : (
+          <></>
+        )}
+      </Box>
     </div>
   );
 };
